@@ -17,13 +17,12 @@ export const MovieCard = (data) => {
  const p = document.createElement('p');
  p.innerText=`평점 ${data.rate}`;
 
-card.addEventListener('click', () => {
+card.addEventListener('click', (e) => {
   const movieKey = card.dataset.id;
   Modal(movieKey);
 })
 
  card.append(img, h3, p);
-
 
  return card;
 }
