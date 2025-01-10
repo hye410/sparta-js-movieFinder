@@ -6,11 +6,10 @@ import { getTrimmedText } from "./util/getTrimmedText.js";
 const $main = document.getElementById('main');
 const $userSearch = document.getElementById('userSearch');
 
-
 /////////// //////////
 export const BASE_URL = 'https://api.themoviedb.org/3';
 export const PUBLIC_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTEyNzBkMDYxZTliNzQ0NmZiNzBiOGYzNWExNjlkYyIsIm5iZiI6MTczNjI5NTgyNi45NjgsInN1YiI6IjY3N2RjNTkyYjExZDA4ODExMTdhZjczNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kECnKC_ZIyWp-vTFYGO9m4QSto2APLO3axKckaOs11Q';
-
+export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
 
 getMovieData(); // 서버에서 data를 불러온다.
 
@@ -42,7 +41,7 @@ const parseData = (data) => {
   if (data.length === 0) return;
   return data.map((_data) => {
     const { id, title, vote_average, poster_path } = _data;
-    return { id, title, rate : vote_average, img : poster_path } 
+    return { id, title, rate : vote_average, img :`${IMAGE_BASE_URL}${poster_path}` } 
   })
 };
 
@@ -56,7 +55,9 @@ $userSearch.addEventListener('input', function(e) {
   filterSearchMovie(e.target.value);
 });
 
+
 const filterSearchMovie = (searchMovie) => {
+  const $movieCards = document.querySelectorAll('.movieCard');
   const movie = getTrimmedText(searchMovie.toLowerCase());
   
   const filteredData = movieData.filter((data) => {
@@ -64,7 +65,7 @@ const filterSearchMovie = (searchMovie) => {
     return title.includes(movie);
   });
 
-  $main.innerHTML = "";
+  $movieCards.forEach((card) => card.remove())
   makeMovieCard(filteredData);
 };
 

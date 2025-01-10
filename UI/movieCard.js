@@ -1,6 +1,5 @@
 import { Modal } from "./modal.js";
 
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
 
 export const MovieCard = (data) => {
  const card =  document.createElement('section'); 
@@ -8,7 +7,7 @@ export const MovieCard = (data) => {
  card.dataset.id = data.id;
 
  const img = document.createElement('img');
- img.src = `${IMAGE_BASE_URL}${data.img}`;
+ img.src = data.img;
  img.alt = data.title;
 
  const h3 = document.createElement('h3'); 

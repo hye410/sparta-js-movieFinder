@@ -1,14 +1,16 @@
 @charset "utf-8";
 
 body {
-  margin : 0
+  margin : 0;
 }
 
 #container {
   /* background-color: pink; */
   width : 100vw;
   /* height: 100vh; */
+
 }
+
 
 header {
   background-color: #323232;
@@ -82,7 +84,8 @@ main {
 
 #main section.movieCard img {
   width : 100%;
-  max-height: 300px;
+  min-height: 300px;
+  height: 70%;
   border-radius: 20px 20px 0 0 ;
   margin-bottom : 5px;
 }
@@ -99,29 +102,85 @@ main {
 
 }
 
+/* ------------------------------------modal------------------------------------ */
+
+#curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); 
+  z-index: 999; 
+  display: none;
+}
+
 .openModal {
-  width : 500px;
-  height: 600px;
-  background-color: rgba(63, 82, 134, 0.844);
+  min-width : 300px;
+  width : 30%;
+  max-width : 600px;
+  height: 80vh;
+  min-height: 500px;
+  max-height: 900px;
+  border-radius: 15px;
+  background-color: #f2f2f2;
   position : fixed;
   top :0;
   bottom : 0;
   margin : auto;
-  padding : 30px 15px;
+  padding : 3% 2%;
+  overflow-y: scroll;
+  z-index: 10000;
+}
+
+.openModal > img{
+  width : 100%;
+  max-height:70%;
+  border-radius: 20px ;
+}
+
+.openModal > p.desc {
+  text-align: justify;
+}
+.openModal>dl {
+  display: flex;
+  align-items: center;
+}
+
+.openModal>dl>dt {
+  font-size: 1rem;
+  font-weight: bold;
+  width: 10%;
+
+}
+
+.openModal>dl>dd{
+  font-size: 0.9rem;
+  width: 80%;
+}
+
+.openModal>button {
+  width: 100%;
+  border : none;
+  margin : 15px 0;
+  padding : 10px;
+  background-color: #323232;
+  color : #fff;
+  cursor: pointer;
 }
 
 .openModal>p.closeBtn {
   position: absolute;
-  top : 0;
-  right: 10px;
-  width : 20px;
-  height: 20px;
+  top : -10px;
+  right: 15px;
   text-align: center;
-  font-size:1.2rem;
+  font-size: 1.5rem;
+  color : red;
 }
 
 .openModal>p.closeBtn:hover{
   cursor: pointer;
+  color : #000;
 }
 
 .closeModal {
