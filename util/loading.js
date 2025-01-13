@@ -20,5 +20,6 @@ export class Loading  {
   end () {
     const $loading = document.querySelector('#loading');
     $loading.style.display = 'none';
+    $loading.remove();
   }
 }

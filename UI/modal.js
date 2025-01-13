@@ -29,7 +29,7 @@ export const Modal = (data,closeModal) => {
   closeBtn.innerHTML = `&times`;
   closeBtn.addEventListener('click',closeModal)
 
-
   $modal.innerHTML = '';
   $modal.append(img, title, desc, releaseInfo, rateInfo, bookmarkBtn, closeBtn);  
 }
+
