@@ -1,4 +1,4 @@
-import { Modal } from "./modal.js";
+import { modal as OpenModal } from "../src/modal.js";
 
 
 export const MovieCard = (data) => {
@@ -16,9 +16,11 @@ export const MovieCard = (data) => {
  const p = document.createElement('p');
  p.innerText=`평점 ${data.rate}`;
 
-card.addEventListener('click', (e) => {
+
+card.addEventListener('click', () => {
+  
   const movieKey = card.dataset.id;
-  Modal(movieKey);
+  OpenModal(movieKey);
 })
 
  card.append(img, h3, p);
