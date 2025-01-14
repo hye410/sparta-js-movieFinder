@@ -21,11 +21,12 @@ export const handleBookmark = (type,key) => {
     alert('북마크에서 삭제되었습니다.');
   }
  
-  // localStorage에서 북마크된 데이터 내보내기
+  // 북마크된 데이터 내보내기
   else if(type === 'get') {
     const bookmarkedMovies = localStorage.getItem('bookmark');
     return JSON.parse(bookmarkedMovies);
   }
+
 };
 
 // 매개변수로 받은 key가 현재 localStorage bookmard에 저장되어있는지 확인하는 함수
@@ -35,4 +36,4 @@ export const checkIsBookmark = (key) => {
   return parsedBookmarkedMovies.findIndex((data) => data === key) !== -1;
 };
 
-const stringifyData = (data) => JSON.stringify(data);
+const stringifyData = (data) => JSON.stringify(data); // localStorage에 저장하기 위해 문자열로 반환하는 함수

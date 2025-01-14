@@ -5,12 +5,10 @@ body {
 }
 
 #container {
-  /* background-color: pink; */
   width : 100vw;
-  /* height: 100vh; */
-
 }
 
+/* ------------------------------------ header ------------------------------------ */
 header {
   background-color: #323232;
     display: flex;
@@ -18,13 +16,12 @@ header {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    /* background-color: aqua; */
     padding-top : 5px;
     padding-bottom : 5px;
 }
+
 header>h1 {
   color : #fff;
-  /* background-color: red; */
 }
 
 header>input {
@@ -38,7 +35,6 @@ header>input {
 }
 
 header>p {
-  /* background-color: firebrick; */
   width :100%;
   text-align: center;
   padding-top : 10px;
@@ -51,6 +47,7 @@ header>p:hover {
   background-color: rgba(35,35,35)
 }
 
+/* ------------------------------------ main ------------------------------------ */
 main {
   padding-top : 30px;
   padding-bottom : 30px;
@@ -59,7 +56,6 @@ main {
 #main {
   width : 80vw;
   margin : 0 auto;
-  /* background-color: skyblue; */
   display: flex;
   flex-wrap : wrap;
   justify-content: center;
@@ -71,7 +67,6 @@ main {
   min-width: 200px;
   height: calc((80vw - 20px) / 6 * 1.5);
   min-height: 400px;
-  /* border:3px solid red; */
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0px 3px 3px #c0c0c0;
@@ -86,13 +81,17 @@ main {
   min-height: 300px;
   height: 70%;
   border-radius: 20px 20px 0 0 ;
-  margin-bottom : vh;
+  margin-bottom : 0.3vh;
 }
 
 #main section.movieCard h3 {
   padding-left : 10px;
-  margin-bottom : 20px;
+  margin-bottom : 2vh;
   font-size: 1rem;
+  text-overflow: ellipsis;
+  height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #main section.movieCard p {
@@ -101,7 +100,7 @@ main {
 
 }
 
-/* ------------------------------------modal------------------------------------ */
+/* ------------------------------------ modal ------------------------------------ */
 
 #curtain {
   position: fixed;
@@ -127,7 +126,7 @@ main {
   top :0;
   bottom : 0;
   margin : auto;
-  padding : 3% 2%;
+  padding : 4vh 3vh;
   overflow-y: scroll;
   z-index: 10000;
 }
@@ -186,6 +185,7 @@ main {
   display: none;
 }
 
+/* ------------------------------------ loading spinner------------------------------------ */
 .spinner {
   position: fixed;
   top: 50%;
