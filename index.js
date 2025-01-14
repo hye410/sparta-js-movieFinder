@@ -2,7 +2,8 @@ import { MovieCard } from "./ui/MovieCard.js";
 import { getMoviesData } from "./api.js";
 import { getTrimmedText } from "./util/getTrimmedText.js";
 import { Loading } from "./util/loading.js";
-import { handleBookmark } from "./handleBookmark.js";
+import { handleBookmark } from "./util/handleBookmark.js";
+import { debounce } from "./util/debounce.js";
 
 ////// Dom 조작 변수 /////
 const $main = document.getElementById('main');
@@ -11,7 +12,7 @@ const $bookmark = document.getElementById('bookmarkedMovies');
 /////////// //////////
 
 
-export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
+export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original'; 
 
 
 let movieData = new Array();
@@ -30,10 +31,12 @@ getMovieData(); // 서버에서 data를 불러온다.
     renderMoviCard(movieData);
     loading.end();
   } catch(error) {
+    console.error(error);
     alert(error);
   }
 };
 
+// 서버에서 받아온 데이터에서 필요한 요소만 골라 정제하는 함수
 const parseData = (data) => {
   if (data.length === 0) return;
   const parsedData = data.map((_data) => {
@@ -43,21 +46,25 @@ const parseData = (data) => {
   return parsedData;
 };
 
-
+// 영화 section 하나 하나를 그려주는 함수
 const renderMoviCard = (movieData) => {
   movieData.forEach((data) => $main.appendChild(MovieCard(data)))
 };
 
+// 영화 검색 시, 타이핑마다 filtering을 실시하지 않도록 디바운스를 걸어주는 함수
+const filterDebounce =  debounce((value) => filterSearchMovie(value));
 
+// 영화 검색 인풋 이벤트
 $userSearch.addEventListener('input', function(e) {
-  filterSearchMovie(e.target.value);
+   const { value } = e.target;
+   filterDebounce(value);
 });
 
-
-
+// 인풋에서 받아온 검색 값에 맞는 데이터를 필터링하는 함수
 const filterSearchMovie = (searchMovie) => {
   const $movieCards = document.querySelectorAll('.movieCard');
   const $noMovie = document.querySelector('.noMovie');
+  
   if($noMovie) $noMovie.remove();
 
   const movie = getTrimmedText(searchMovie.toLowerCase());
@@ -67,24 +74,27 @@ const filterSearchMovie = (searchMovie) => {
     return title.includes(movie);
   });
 
-  $movieCards.forEach((card) => card.remove())
+  $movieCards.forEach((card) => card.remove());
+  
   renderMoviCard(filteredData);
 };
 
-
+// 북마크 추가/삭제 이벤트
 $bookmark.addEventListener('click',() => {
     const $movieCards = document.querySelectorAll('.movieCard');
     const bookmarkedMovies = new Set(handleBookmark('get'));
     const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
     $movieCards.forEach((card) => card.remove());
+
     if(newRenderData.length === 0){
+        //기존에 이미 해당 요소('북마크된 영화가 없습니다.')가 추가되어 있으면 추가하지 않기 위해 분기 처리
       if (!$main.querySelector('.noMovie')) {
         const noBookmarkedMovie = document.createElement('div');
         noBookmarkedMovie.className = 'noMovie';
         noBookmarkedMovie.textContent = '북마크된 영화가 없습니다.';
         $main.appendChild(noBookmarkedMovie);
-      }
-    }
-    else renderMoviCard(newRenderData);
+      } 
+
+    } else renderMoviCard(newRenderData);
 })
 

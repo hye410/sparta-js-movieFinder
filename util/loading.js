@@ -1,5 +1,7 @@
 const $modal = document.getElementsByClassName('modal');
 
+// loading spinner 
+
 export class Loading  {
   constructor (location) {
     this.location = location; 

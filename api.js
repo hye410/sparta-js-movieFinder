@@ -13,7 +13,7 @@ const options = {
   }
 }
 
-
+// 현재 상영 중인 영화의 데이터를 불러옴.
 export const getMoviesData = async () => {
   try{
     const res =  await fetch(`${BASE_URL}/movie/now_playing?language=ko-KR&page=1`, options);
@@ -25,6 +25,7 @@ export const getMoviesData = async () => {
   }
 }
 
+// 특정 영화의 상세 데이터를 불러옴.
 export const getDetailMovie = async (key) => {
   try {
     const res = await fetch(`${BASE_URL}/movie/${key}?language=ko-KR`, options);
@@ -36,18 +37,3 @@ export const getDetailMovie = async (key) => {
   }
 };
 
-// export const getMoviesDataTest = async (key) => {
-//   try{
-//     const res =  await fetch(`${BASE_URL}/movie/now_playing/${key}?language=ko-KR&page=1`, options);
-//     // if(!res.ok){ throw new Error(res?.status_message || DEFAULT_FETCH_ERROR_MESSAGE);}
-//     if (!res.ok) {
-//       const errorData = await res.json().catch(() => null);
-//       const errorMessage = errorData?.status_message || DEFAULT_FETCH_ERROR_MESSAGE;
-//       throw new Error(errorMessage); 
-//     }
-//     const data = await res.json();
-//     return data;
-//   } catch(error) {
-//     throw error;
-//   }
-// }

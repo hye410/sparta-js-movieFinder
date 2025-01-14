@@ -9,16 +9,19 @@ const $modal = document.querySelector('.modal');
 
 const loading = new Loading($modal);
 
-const getDetailMovieData =  async (key) => {
+// 특정 영화의 상세 데이터를 서버에서 받아온다.
+const getDetailMovieData = async (key) => {
   try{
     const data = await getDetailMovie(key);
    return parseDetailData(data);
   } catch  (error) {
+      console.error(error);
       alert(error);
       closeModal();
   }
 }
 
+// 받아온 데이터에서 필요한 요소만 거른다.
 const parseDetailData = (data) => {
   if(Object.keys(data).length === 0) return;
   return {
@@ -39,9 +42,14 @@ export const modal = async (key) => {
     $modal.className = 'openModal';
     $curtain.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    const movieDetailData = await getDetailMovieData(key);
-    loading.end();
-    renderModal(movieDetailData,closeModal);
+    try{
+      const movieDetailData = await getDetailMovieData(key);
+      loading.end();
+      renderModal(movieDetailData,closeModal);
+    } catch(error) {
+      console.error(error);
+      alert(error);
+    }
   }
 }
 
