@@ -57,6 +57,9 @@ $userSearch.addEventListener('input', function(e) {
 
 const filterSearchMovie = (searchMovie) => {
   const $movieCards = document.querySelectorAll('.movieCard');
+  const $noMovie = document.querySelector('.noMovie');
+  if($noMovie) $noMovie.remove();
+
   const movie = getTrimmedText(searchMovie.toLowerCase());
   
   const filteredData = movieData.filter((data) => {
@@ -70,11 +73,18 @@ const filterSearchMovie = (searchMovie) => {
 
 
 $bookmark.addEventListener('click',() => {
-  const $movieCards = document.querySelectorAll('.movieCard');
-  const bookmarkedMovies = new Set(handleBookmark('get'));
-  const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
-  $movieCards.forEach((card) => card.remove());
-  if(newRenderData.length === 0) $main.append('북마크에 추가된 내용이 없습니다.');
-  else renderMoviCard(newRenderData);
+    const $movieCards = document.querySelectorAll('.movieCard');
+    const bookmarkedMovies = new Set(handleBookmark('get'));
+    const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
+    $movieCards.forEach((card) => card.remove());
+    if(newRenderData.length === 0){
+      if (!$main.querySelector('.noMovie')) {
+        const noBookmarkedMovie = document.createElement('div');
+        noBookmarkedMovie.className = 'noMovie';
+        noBookmarkedMovie.textContent = '북마크된 영화가 없습니다.';
+        $main.appendChild(noBookmarkedMovie);
+      }
+    }
+    else renderMoviCard(newRenderData);
 })
 
