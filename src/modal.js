@@ -9,7 +9,7 @@ const $modal = document.querySelector('.modal');
 
 const loading = new Loading($modal);
 
-const getDetailMovieData = async (key) => {
+const getDetailMovieData =  async (key) => {
   try{
     const data = await getDetailMovie(key);
    return parseDetailData(data);
@@ -22,10 +22,11 @@ const getDetailMovieData = async (key) => {
 const parseDetailData = (data) => {
   if(Object.keys(data).length === 0) return;
   return {
+    id:data.id,
     title : data.title,
     desc : data.overview,
     release : data.release_date,
-    rate : data.vote_average.toFixed(1),
+    rate : data.vote_average?.toFixed(1),
     img : `${IMAGE_BASE_URL}${data.poster_path}`
   }
 }
@@ -50,5 +51,6 @@ const closeModal = () => {
     $modal.innerHTML = '';
     document.body.style.overflow = 'scroll';
 }
+
 
 

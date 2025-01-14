@@ -2,10 +2,12 @@ import { MovieCard } from "./ui/MovieCard.js";
 import { getMoviesData } from "./api.js";
 import { getTrimmedText } from "./util/getTrimmedText.js";
 import { Loading } from "./util/loading.js";
+import { handleBookmark } from "./handleBookmark.js";
 
 ////// Dom 조작 변수 /////
 const $main = document.getElementById('main');
 const $userSearch = document.getElementById('userSearch');
+const $bookmark = document.getElementById('bookmarkedMovies');
 /////////// //////////
 
 
@@ -52,6 +54,7 @@ $userSearch.addEventListener('input', function(e) {
 });
 
 
+
 const filterSearchMovie = (searchMovie) => {
   const $movieCards = document.querySelectorAll('.movieCard');
   const movie = getTrimmedText(searchMovie.toLowerCase());
@@ -66,4 +69,11 @@ const filterSearchMovie = (searchMovie) => {
 };
 
 
+$bookmark.addEventListener('click',() => {
+  const $movieCards = document.querySelectorAll('.movieCard');
+  const bookmarkedMovies = new Set(handleBookmark('get'));
+  const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
+  $movieCards.forEach((card) => card.remove());
+  renderMoviCard(newRenderData);
+})
 
