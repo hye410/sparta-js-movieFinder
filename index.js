@@ -74,6 +74,7 @@ $bookmark.addEventListener('click',() => {
   const bookmarkedMovies = new Set(handleBookmark('get'));
   const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
   $movieCards.forEach((card) => card.remove());
-  renderMoviCard(newRenderData);
+  if(newRenderData.length === 0) $main.append('북마크에 추가된 내용이 없습니다.');
+  else renderMoviCard(newRenderData);
 })
 
