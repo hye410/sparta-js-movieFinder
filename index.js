@@ -20,7 +20,6 @@ const loading = new Loading($main);
 
 getMovieData(); // 서버에서 data를 불러온다.
 
-
  async function getMovieData() {
   loading.create();
   loading.start();
@@ -31,6 +30,7 @@ getMovieData(); // 서버에서 data를 불러온다.
     renderMoviCard(movieData);
     loading.end();
   } catch(error) {
+    console.log('여기가 에러자리야!!!',error)
     console.error(error);
     alert(error);
     loading.end();

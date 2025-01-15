@@ -17,9 +17,9 @@ const options = {
 export const getMoviesData = async () => {
   try{
     const res =  await fetch(`${BASE_URL}/movie/now_playing?language=ko-KR&page=1`, options);
-    if(!res.ok) throw new Error(DEFAULT_FETCH_ERROR_MESSAGE);
-    const data = await res.json();
-    return data;
+    const result = await res.json();
+    if(!res.ok) throw new Error(result.status_message || DEFAULT_FETCH_ERROR_MESSAGE)
+    return result;
   } catch(error) {
     throw error|| DEFAULT_ERROR_MESSAGE;
   }
@@ -29,9 +29,9 @@ export const getMoviesData = async () => {
 export const getDetailMovie = async (key) => {
   try {
     const res = await fetch(`${BASE_URL}/movie/${key}?language=ko-KR`, options);
-    if(!res.ok) throw new Error(DEFAULT_FETCH_ERROR_MESSAGE);
-    const data = await res.json();
-    return data;
+    const result = await res.json();
+    if(!res.ok) throw new Error(result.status_message || DEFAULT_FETCH_ERROR_MESSAGE);
+    return result;
   } catch(error) {
     throw error || DEFAULT_ERROR_MESSAGE; 
   }
