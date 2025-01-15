@@ -18,6 +18,7 @@ const getDetailMovieData = async (key) => {
       console.error(error);
       alert(error);
       closeModal();
+      throw error;
   }
 }
 
@@ -42,14 +43,10 @@ export const modal = async (key) => {
     $modal.className = 'openModal';
     $curtain.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    try{
-      const movieDetailData = await getDetailMovieData(key);
-      loading.end();
-      renderModal(movieDetailData,closeModal);
-    } catch(error) {
-      console.error(error);
-      alert(error);
-    }
+    
+    const movieDetailData = await getDetailMovieData(key);
+    loading.end();
+    renderModal(movieDetailData,closeModal);
   }
 }
 

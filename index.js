@@ -27,18 +27,19 @@ getMovieData(); // 서버에서 data를 불러온다.
   try{
     const data = await getMoviesData();
     const { results } = data;
-    movieData = parseData(results);
+    movieData = parseData(results) || [];
     renderMoviCard(movieData);
     loading.end();
   } catch(error) {
     console.error(error);
     alert(error);
+    loading.end();
   }
 };
 
 // 서버에서 받아온 데이터에서 필요한 요소만 골라 정제하는 함수
 const parseData = (data) => {
-  if (data.length === 0) return;
+  if (!data || data.length === 0) return;
   const parsedData = data.map((_data) => {
     const { id, title, vote_average, poster_path } = _data;
     return { id, title, rate : vote_average.toFixed(1), img :`${IMAGE_BASE_URL}${poster_path}` } 
@@ -46,8 +47,9 @@ const parseData = (data) => {
   return parsedData;
 };
 
-// 영화 section 하나 하나를 그려주는 함수
+// 영화 카드 하나 하나를 그려주는 함수
 const renderMoviCard = (movieData) => {
+  if(movieData.length === 0 ) return;
   movieData.forEach((data) => $main.appendChild(MovieCard(data)))
 };
 
@@ -79,7 +81,7 @@ const filterSearchMovie = (searchMovie) => {
   renderMoviCard(filteredData);
 };
 
-// 북마크 추가/삭제 이벤트
+// 북마크 보기
 $bookmark.addEventListener('click',() => {
     const $movieCards = document.querySelectorAll('.movieCard');
     const bookmarkedMovies = new Set(handleBookmark('get'));

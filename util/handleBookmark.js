@@ -1,9 +1,9 @@
 
 export const handleBookmark = (type,key) => {
+  const bookmarkedMovies = localStorage.getItem('bookmark');
+  const parsedBookmarkedMovies = JSON.parse(bookmarkedMovies) || []; 
   // 북마크 추가
   if(type === 'add') {
-    const bookmarkedMovies = localStorage.getItem('bookmark');
-    const parsedBookmarkedMovies = JSON.parse(bookmarkedMovies) || []; 
     parsedBookmarkedMovies.push(key);
     const strigifyNewData = stringifyData(parsedBookmarkedMovies);
     localStorage.setItem('bookmark',strigifyNewData);
@@ -12,8 +12,6 @@ export const handleBookmark = (type,key) => {
 
   // 북마크 삭제
   else if(type === 'delete') {
-    const bookmarkedMovies = localStorage.getItem('bookmark');
-    const parsedBookmarkedMovies = JSON.parse(bookmarkedMovies) || []; 
     const newData = parsedBookmarkedMovies.filter((data) => data !== key);
     const strigifyNewData = stringifyData(newData);
     localStorage.removeItem('bookmark');
