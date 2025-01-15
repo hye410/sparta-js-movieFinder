@@ -30,7 +30,6 @@ getMovieData(); // 서버에서 data를 불러온다.
     renderMoviCard(movieData);
     loading.end();
   } catch(error) {
-    console.log('여기가 에러자리야!!!',error)
     console.error(error);
     alert(error);
     loading.end();
@@ -86,6 +85,7 @@ $bookmark.addEventListener('click',() => {
     const $movieCards = document.querySelectorAll('.movieCard');
     const bookmarkedMovies = new Set(handleBookmark('get'));
     const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
+
     $movieCards.forEach((card) => card.remove());
 
     if(newRenderData.length === 0){
