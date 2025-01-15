@@ -83,8 +83,10 @@ const filterSearchMovie = (searchMovie) => {
 // 북마크 보기
 $bookmark.addEventListener('click',() => {
     const $movieCards = document.querySelectorAll('.movieCard');
-    const bookmarkedMovies = new Set(handleBookmark('get'));
-    const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
+    // const bookmarkedMovies = new Set(handleBookmark('get'));
+    // const newRenderData = movieData.filter(data => bookmarkedMovies.has(data.id));
+    const bookmarkedMovies = handleBookmark('get');
+    const newRenderData = movieData.filter(({id}) => bookmarkedMovies.includes(id));
 
     $movieCards.forEach((card) => card.remove());
 

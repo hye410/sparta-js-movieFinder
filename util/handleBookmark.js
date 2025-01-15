@@ -24,7 +24,6 @@ export const handleBookmark = (type,key) => {
     const bookmarkedMovies = localStorage.getItem('bookmark');
     return JSON.parse(bookmarkedMovies);
   }
-
 };
 
 // 매개변수로 받은 key가 현재 localStorage bookmard에 저장되어있는지 확인하는 함수

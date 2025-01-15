@@ -31,7 +31,7 @@ export const getDetailMovie = async (key) => {
     const res = await fetch(`${BASE_URL}/movie/${key}?language=ko-KR`, options);
     const result = await res.json();
     if(!res.ok) throw new Error(result.status_message || DEFAULT_FETCH_ERROR_MESSAGE);
-    return result;
+    return result || {};
   } catch(error) {
     throw error || DEFAULT_ERROR_MESSAGE; 
   }
