@@ -1,4 +1,4 @@
-import { API_KEY } from "./private.js";
+import { API_KEY } from "../private.js";
 const BASE_URL = 'https://api.themoviedb.org/3';
 const PUBLIC_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTEyNzBkMDYxZTliNzQ0NmZiNzBiOGYzNWExNjlkYyIsIm5iZiI6MTczNjI5NTgyNi45NjgsInN1YiI6IjY3N2RjNTkyYjExZDA4ODExMTdhZjczNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kECnKC_ZIyWp-vTFYGO9m4QSto2APLO3axKckaOs11Q';
 const DEFAULT_ERROR_MESSAGE = '에러가 발생했습니다.';

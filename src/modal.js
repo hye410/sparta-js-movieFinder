@@ -1,7 +1,7 @@
 import { IMAGE_BASE_URL } from "../index.js";
 import { Modal as renderModal } from '../ui/Modal.js';
 import { Loading } from "../util/loading.js";
-import { getDetailMovie } from "../api.js";
+import { getDetailMovie } from "../util/api.js";
 
 
 const $curtain = document.querySelector('#curtain');

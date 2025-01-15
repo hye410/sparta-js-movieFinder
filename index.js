@@ -1,5 +1,5 @@
 import { MovieCard } from "./ui/MovieCard.js";
-import { getMoviesData } from "./api.js";
+import { getMoviesData } from "./util/api.js";
 import { getTrimmedText } from "./util/getTrimmedText.js";
 import { Loading } from "./util/loading.js";
 import { handleBookmark } from "./util/handleBookmark.js";
